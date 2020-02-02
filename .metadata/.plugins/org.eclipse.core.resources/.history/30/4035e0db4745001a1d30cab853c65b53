@@ -1,0 +1,246 @@
+
+/*
+ PSEUDO CODE:
+    variables: unitType, height, weight, isValid 
+
+    enumerations for unit type and category
+
+    BMICalculator(){
+        initialize scanner object
+    }
+
+    readUserData() {
+        use unit type to display appropriate msg
+        exit on negative height/weight (cancel condition)
+        store input
+    }
+    readUnitType() {
+        use while loop
+        scan for valid input 1 or 2 for unit type
+        store in variable
+    }
+    readMeasurementData() {
+        if(unitType == 1)
+        call metricData method
+        etc.
+    }
+    readMetricData() {
+        println(appropriate message)
+        in.getInt 2x
+        if(input > 0){
+        close program
+    }
+
+    readImperialData() {
+        same as above with slight differences
+    }
+
+    calculateBmi() {
+        based on unit type uses formula to calc bmi
+        calculates category after
+        and finally display message
+    }
+    calculateBmiCategory() {
+        iterate through each category type and test val 
+        against bmi score
+    }
+    displayBmi() {
+        print statement
+    }
+    setHeight(float height) {
+        simple setter
+    }
+    getHeight() {
+        simple getter
+    }
+    setWeight(float weight) {
+        redu
+    }
+    getWeight() {
+        redu
+    }
+    getBmi() {
+        public method used to acces calculate bmi method
+    }
+    getBmiCategory() {
+        public method used to acces bmi category method
+    }
+ */
+
+import java.util.Scanner; 
+
+public class BMICalculator {
+    
+    public enum UnitType{
+        metric(1), imperial(2);
+
+        int code; // 1 or 2 
+        
+        private UnitType(int val) {
+            code = val;
+        }
+        
+    }
+    
+    public enum BMICategory{
+        underWeight(0f, "Under Weight"), normalWeight(18.5f, "Normal Weight"),
+        overWeight(25f, "Over Weight"),obesity(30f, "Obese");
+        
+        float BmiScore;
+        String dscrp;
+        private BMICategory(float bmi, String description ) {
+            BmiScore = bmi; 
+            dscrp = description;
+        }
+    }
+
+    private UnitType unitType; 
+    private BMICategory category; 
+    private Scanner in; 
+    private float weight = 0; 
+    private float height = 0;
+    private float BMI = 0.0f; 
+    
+    private boolean inputValid = false; 
+
+
+
+//make sure to remove static modifier (instance method)
+
+    public BMICalculator() {
+        in = new Scanner(System.in);
+        System.out.println("Welcome to the BMI calculator app.");
+    }
+
+    public void readUserData() {
+        readUnitType();
+        readMeasurementData();
+    }
+
+    private void readUnitType() {
+        System.out.println("Enter \"1\" use metric system: Enter \"2\" "
+                + "to use imperial system ");
+        int val = 0;
+        while(!inputValid){
+            
+            val = in.nextInt();
+            if(val != 1 && val != 2){
+                System.out.println("Invalid type entered. Please try again. ");
+                
+            }
+            else{ // input is valid
+                for(UnitType type: UnitType.values()){
+                    if(type.code == val){
+                        unitType = type;
+                    }
+                }
+                inputValid = true; // end loop
+            }
+
+        }
+    }
+
+
+
+    private void readMeasurementData() {
+        if(unitType == UnitType.metric){
+            readMetricData();
+        }
+        else if(unitType == UnitType.imperial){
+            readImperialData();
+        }
+    }
+
+
+
+    private void readMetricData() {
+        System.out.print("Enter the amount you kilograms in pounds (kg): ");
+        setWeight(in.nextFloat());
+        System.out.print("Enter the amount you height in meters (m): ");
+        setHeight(in.nextFloat());
+        if(weight < 0 || height  < 0){
+            System.exit(0);
+        }
+       
+    }
+
+
+    private void readImperialData() {
+        System.out.print("Enter the amount you weight in pounds (lb): ");
+        setWeight(in.nextFloat());
+        System.out.print("Enter the amount you height in inches (in): ");
+        setHeight(in.nextFloat());
+        if(weight < 0 || height  < 0){
+            System.exit(0);
+        }
+
+    }
+
+
+
+
+
+    //should it return?
+    public float calculateBmi() {
+        if(unitType == UnitType.metric){
+            BMI = weight / (height * height);
+        }
+        else if(unitType == UnitType.imperial){
+            BMI = (weight * 703) / (height * height);
+        }
+        calculateBmiCategory();
+        // displayBmi();
+        return BMI; 
+    }
+
+
+
+
+
+    private void calculateBmiCategory() {
+        for(BMICategory cat: BMICategory.values()){
+            if(BMI >= cat.BmiScore){ // similar to finding the largest value
+                category = cat; 
+            }
+        }
+    }
+
+
+    public void displayBmi() {
+        System.out.printf("%s : %f \n%s : %s\n", "Your Bmi score is", getBmi(),
+                "The BMI cateogry you fit in is", getBmiCategory());
+    }
+
+
+    private void setHeight(float height) {
+        this.height = height;
+    }
+
+
+    public float getHeight() {
+        return height; 
+    }
+
+
+    private void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+
+    public float getWeight() {
+        return weight; 
+    }
+
+
+    public float getBmi() {
+        return BMI;
+
+    }
+
+
+    public String getBmiCategory() {
+        return category.dscrp; 
+
+    }
+
+}

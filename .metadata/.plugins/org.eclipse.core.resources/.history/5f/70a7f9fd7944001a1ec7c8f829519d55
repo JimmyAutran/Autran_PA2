@@ -1,0 +1,33 @@
+
+import java.util.Scanner; 
+
+public class Application {
+
+	
+	public static void main (String args[]) 					{
+		Scanner in = new Scanner(System.in);
+		int fourDigitNum = 0;
+		int digitArray[] = new int[4];
+		boolean inputDirty = true;
+		
+		
+		while(inputDirty) {
+			in.reset();
+			System.out.println("Please enter a four digit number: ");
+			fourDigitNum = in.nextInt(); 
+			if(fourDigitNum > 9999) {
+				System.out.println("Input is invalid please try again.\n");
+				break;
+			}
+			else {
+				inputDirty = false;
+			}
+			
+		}
+	
+		in.close(); 	
+	}
+		
+		
+		
+}

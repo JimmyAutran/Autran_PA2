@@ -1,0 +1,49 @@
+
+import java.util.Scanner; 
+
+public class Application {
+
+	
+	public static void main (String args[]) 					{
+		Scanner in = new Scanner(System.in);
+		Encrypt encryptor = new Encrypt();
+		Decrypt decryptor = new Decrypt();
+		int fourDigitNum = 0;
+		int digitArray[] = new int[4]; // digit 1 is the largest valuer of the integer thousandths place
+		boolean inputDirty = true;
+		
+		
+		while(inputDirty) {
+			//in.reset();
+			System.out.println("Please enter a four digit number: ");
+			fourDigitNum = in.nextInt(); 
+			if(fourDigitNum > 9999) {
+				System.out.println("Input is invalid please try again.\n");
+			}
+			else {
+				inputDirty = false;
+			}
+			
+		}
+		
+		digitArray = encryptor.encrypt(fourDigitNum); 
+		
+
+		for(int i = 0; i < digitArray.length; i++) {
+			System.out.printf("%d", digitArray[i]);
+			
+		}
+		
+		digitArray = decryptor.decrypt((1000*digitArray[0]) + (100*digitArray[1]) + (10*digitArray[2]) + digitArray[3]);
+	
+		for(int i = 0; i < digitArray.length; i++) {
+			System.out.printf("%d", digitArray[i]);
+			
+		}
+		
+		in.close(); 	
+	}
+		
+		
+		
+}

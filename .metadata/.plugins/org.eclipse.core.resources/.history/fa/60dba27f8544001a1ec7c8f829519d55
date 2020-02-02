@@ -1,0 +1,36 @@
+
+public class Decrypt {
+	int digitArray[] = new int[4];
+	
+	
+	
+	public int[] decrypt(int fourDigitNum) {
+		
+		// replaces 1st digit with 3rd digit and 2nd digit with 4th
+		for(int i = 0; i < 2; i++) {
+			int temp = 0; 
+			temp = digitArray[i];
+			digitArray[i] = digitArray[i+2];
+			digitArray[i+2] = temp; 
+		}
+		
+		
+		
+		for(int i = 0; i < digitArray.length; i++) {
+			if(digitArray[i] >= 7) {
+				digitArray[i] -= 7; 
+				
+				
+			}
+			else {
+				digitArray[i] += 3; 
+			}
+			
+			
+		}
+		
+		return digitArray; 
+		
+	}
+	
+}

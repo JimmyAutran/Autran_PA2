@@ -1,0 +1,104 @@
+
+import java.util.Scanner; 
+
+
+public class BMICalculator {
+	private int readUnitType;
+	private int readMeasurementData; 
+	private Scanner in; 
+	private float weight = 0; 
+	private float height = 0;
+	
+	
+	//make sure to remove static modifier (instance method)
+	
+	//remove this method
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+			
+	}
+	
+	
+	public static void readUserDate() {
+		in = new Scanner(System.in);
+		
+		
+	}
+	
+
+	
+	private static void readUnitType() {
+		
+		
+		
+		
+	}
+	
+	
+	private static void readMeasurementData() {
+		
+		
+		
+		
+	}
+	
+	
+	private static void readMetricData() {
+		
+		
+		
+	}
+	
+	private static void readImperialData() {
+		
+	}
+
+	
+	
+	public static void calculateBmi() {
+		
+		
+	}
+	
+	
+	
+	
+	private static void calculateBmiCategory() {
+		
+		
+		
+	}
+	
+	public static void displayBmi() {
+		
+		
+		
+	}
+	
+	public static void setHeight(float height) {
+		
+	}
+	
+	public static float getHeight() {
+		return 0; 
+	}
+	
+	public static void setWeight(float weight) {
+		
+		
+		
+	}
+	
+	public static float getWeight() {
+		
+		return 0; 
+	}
+	
+	public static float getBmi() {
+		return 0;
+	}
+	
+	public static float getBmiCategory() {
+		return 0; 
+	}
+}
